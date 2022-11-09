@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.constants as sp
 import scipy.fft as fft
+from tqdm import tqdm
 
 
 def refractive_index(w, w_TO, w_LO, gamm, epsilInf):
@@ -30,20 +31,20 @@ def electrooptic_coeff(r_e, w, w_TO, gamm, Faust_Henry_coeff):
 
 
 # __ Constants ___
-w_TO = 177  #
-w_LO = 206  #
-gamm = 3.01  #
-epsilInf = 6.7  #
-Faust_Henry_coeff = 0.02  #
-n_g = 2.8528  #
-r_e = 1  # constant ?
-c = 1  # speed of light ???  Question with dimension
-max_thz = 300 # Change here interested range of THz from 0
+w_TO = 177  # transverse optical phonon frequency
+w_LO = 206  # longitudinal optical phonon frequency
+gamm = 3.01  # lattice damping
+epsilInf = 6.7  # high-frequency dielectric constant
+Faust_Henry_coeff = 0.02  # represents the ratio between the ionic and the electronic part of the electro-optic effect
+n_g = 2.8528  # group refractive index for 800 nm
+r_e = 1  # ??? electronic nonlinearity is assumed to be constant at the mid- and far-infrared frequencies
+c = 1  # ??? speed of light ???  Question with dimension
+max_thz = 200 # Change here interested range of THz from 0
 
 plt.rcParams.update({'figure.max_open_warning': 0}) # Error Catching (opened plots)
 
 # Building the function
-
+print("Loading...")
 for i in range(1, max_thz+1):
     thickness = i
     w = np.linspace(1, max_thz, max_thz)
@@ -57,7 +58,7 @@ for i in range(1, max_thz+1):
     fig.suptitle('Response function R(w) for different thicknesses of ZnTe crystal\n \n' + str(i) + ' micrometers',
                  fontname="Times New Roman", fontweight="bold")
 
-    plt.ylim(-0.020, 0.015) # Set anz limit for y axis
+    plt.ylim(-0.025, 0.015) # Set the limit for y axis
 
     plt.xlabel('THz', fontname="Times New Roman", fontweight="bold")
     plt.ylabel('R(w)', fontname="Times New Roman", fontweight="bold")
@@ -65,9 +66,8 @@ for i in range(1, max_thz+1):
     plt.yticks(fontsize=10, fontname="Times New Roman")
     plt.xticks(fontsize=10, fontname="Times New Roman")
 
-    plt.plot(w, np.real(fft.fft(ComplexResponse_function)))
-    # plt.semilogy(w, np.real(fft.fft(ComplexResponse_function))) # Logarithmic axis
-    # plt.plot(w, np.imag(fft.fft(ComplexResponse_function))) # Imaginary plane
+    # plt.plot(w, np.real(fft.fft(ComplexResponse_function)))  # Real space
+    plt.plot(w, np.imag(fft.fft(ComplexResponse_function)))  # Imaginary space
 
     name = str(i) + '.png'
     plt.savefig(name)
@@ -78,3 +78,5 @@ images = []
 for i in range(1, max_thz+1):
     images.append(imageio.imread(str(i) + '.png'))
 imageio.mimsave('movie.gif', images)
+
+print("Finished. Check your code filepath.")
