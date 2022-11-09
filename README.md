@@ -1,7 +1,7 @@
-# ZnTe Responce Function
+# ZnTe Response Function
 
 Find attached in this repository the last updates on python code. 
-Also, two folders with built plots for real and imaginary space and a gif file to see the function in dynamics.
+Also, three folders with built plots for clear, Fourie transformed in real and imaginary space, and gif files to see the function in dynamics.
 Finally, the code is commented on with a few questions.
 
 
