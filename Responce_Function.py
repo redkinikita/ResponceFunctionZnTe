@@ -65,8 +65,8 @@ for i in range(1, max_thz+1):
     plt.yticks(fontsize=10, fontname="Times New Roman")
     plt.xticks(fontsize=10, fontname="Times New Roman")
 
-    # plt.plot(w, np.real(fft.fft(ComplexResponse_function)))  # Real space
-    plt.plot(w, np.imag(fft.fft(ComplexResponse_function)))  # Imaginary space
+    plt.plot(w, np.real(fft.fft(ComplexResponse_function)))  # Real space
+    # plt.plot(w, np.imag(fft.fft(ComplexResponse_function)))  # Imaginary space
 
     name = str(i) + '.png'
     plt.savefig(name)
