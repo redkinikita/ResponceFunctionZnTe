@@ -5,7 +5,6 @@ import scipy.constants as sp
 import scipy.fft as fft
 
 
-
 def refractive_index(w, w_TO, w_LO, gamm, epsilInf):
     n_w = np.sqrt(1 + ((w_LO ** 2 - w_TO ** 2) / (w_TO ** 2 - (sp.hbar * w) ** 2 - 1j * sp.hbar * w * gamm)) * epsilInf)
     return n_w
