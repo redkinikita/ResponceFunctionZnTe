@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.constants as sp
 import scipy.fft as fft
-from tqdm import tqdm
+
 
 
 def refractive_index(w, w_TO, w_LO, gamm, epsilInf):
